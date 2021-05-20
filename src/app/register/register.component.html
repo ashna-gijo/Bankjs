@@ -5,13 +5,16 @@
             <div class="main">
                 <h4>Welcome to YES Bank<br><br>
                 <h5>Register-Form</h5></h4><br>
-            
 
-            <input type="text" id="acno" [(ngModel)]="acno" placeholder="enter account number"><br><br>
-            <input type="text" name="" id="uname" [(ngModel]="uname" placeholder="enter username"><br><br>
-            <input type="password" id="pwd" [(ngModel)]="pswd"  placeholder="enter password"><br><br>
+            <form (ngSubmit)="register()">
+
+            <input type="text" id="acno" name="acno" [(ngModel)]="acno" placeholder="enter account number"><br><br>
+            <input type="text" name="" id="uname" name="uname" [(ngModel]="uname" placeholder="enter username"><br><br>
+            <input type="password" id="pwd" name="pswd" [(ngModel)]="pswd"  placeholder="enter password"><br><br>
            
-            <input type="button" value="Register" (click)="register()" class="button button1 butefct"><br>
+            <input type="submit" value="Register"  class="button button1 butefct"><br>
+            <a routerLink="">Log In</a>
+        </form>
 
         </div>
     </div>
