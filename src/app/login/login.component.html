@@ -5,11 +5,12 @@
             <div class="main">
                 <h4>Welcome to YES Bank<br><br>
                 <h5>{{aim}}</h5></h4><br>
-            <form (ngSubmit)="login()">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-            <input type="text" id="acno" name="acno" [(ngModel)]="acno" placeholder="enter account number"><br><br>
-            <input type="text" name="" id="uname" placeholder="enter username"><br><br>
-            <input type="password" id="pwd" name="pswd" [(ngModel)]="pswd"  placeholder="enter password"><br><br>
+            <input type="text" id="acno" name="acno" formControlName="acno" placeholder="enter account number"><br>
+            <div *ngIf="(loginForm.get('acno')?.touched || loginForm.get('acno')?.dirty) && loginForm.get('acno')?.errors" class="error">Invalid Account Number</div><br>
+            <input type="password" id="pwd" name="pswd" formControlName="pswd"  placeholder="enter password"><br>
+            <div *ngIf="(loginForm.get('pswd')?.touched || loginForm.get('pswd')?.dirty) && loginForm.get('pswd')?.errors" class="error">Invalid Password</div><br>
             <button type="submit" class="btn btn-success"  onclick="Bank.login()">login </button><br><br>
             <input type="button" value="Create New Account" (click)="register()" class="button button1 butefct"><br>
         </form>

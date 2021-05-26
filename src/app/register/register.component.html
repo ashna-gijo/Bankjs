@@ -6,12 +6,14 @@
                 <h4>Welcome to YES Bank<br><br>
                 <h5>Register-Form</h5></h4><br>
 
-            <form (ngSubmit)="register()">
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
 
-            <input type="text" id="acno" name="acno" [(ngModel)]="acno" placeholder="enter account number"><br><br>
-            <input type="text" name="" id="uname" name="uname" [(ngModel]="uname" placeholder="enter username"><br><br>
-            <input type="password" id="pwd" name="pswd" [(ngModel)]="pswd"  placeholder="enter password"><br><br>
-           
+            <input type="text" name="" id="uname" name="uname" formControlName="uname" placeholder="enter username"><br>
+            <div *ngIf="(registerForm.get('uname')?.touched || registerForm.get('uname')?.dirty) && registerForm.get('uname')?.errors" class="error">Invalid Username</div><br>
+            <input type="text" id="acno" name="acno" formControlName="acno" placeholder="enter account number"><br>
+            <div *ngIf="(registerForm.get('acno')?.touched || registerForm.get('acno')?.dirty) && registerForm.get('acno')?.errors" class="error">Invalid Account Number</div><br>
+            <input type="password" id="pwd" name="pswd" formControlName="pswd"  placeholder="enter password"><br>
+            <div *ngIf="(registerForm.get('pswd')?.touched || registerForm.get('pswd')?.dirty) && registerForm.get('pswd')?.errors" class="error">Invalid Password</div><br>
             <input type="submit" value="Register"  class="button button1 butefct"><br>
             <a routerLink="">Log In</a>
         </form>
@@ -21,3 +23,4 @@
         <div class="col-4"></div>
     </div>
 </div>
+            
