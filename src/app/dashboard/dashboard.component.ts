@@ -23,23 +23,33 @@ export class DashboardComponent implements OnInit {
   
   })
 
-  user=this.dataService.currentUser;
+  user:any;
+  acno:any;
   
-  constructor(private dataService:DataService,private fb:FormBuilder) { }
+  constructor(private dataService:DataService,private fb:FormBuilder) {
+    this.user=localStorage.getItem("name")
+   }
 
   ngOnInit(): void {
   }
 
   deposit(){
+    var accno=this.depositForm.value.acno;
+    var pswd=this.depositForm.value.pswd;
+    var amount=this.depositForm.value.amount;
     //alert("Amount credited");
     if(this.depositForm.valid){
-      var accno=this.depositForm.value.acno;
-      var pswd=this.depositForm.value.pswd;
-      var amount=this.depositForm.value.amount;
-      const result=this.dataService.deposit(accno,pswd,amount)
-      if(result){
-        alert("The given amount "+amount+" has been credited....and New balance is: "+result);
-      }
+     
+      this.dataService.deposit(accno,pswd,amount)
+      .subscribe((result:any)=>{
+        if(result){
+          alert(result.message)
+        }
+       
+      },
+      (result:any)=>{
+        alert(result.error.message)
+      })
     }
     else{
       alert("Invalid Form")
@@ -48,19 +58,30 @@ export class DashboardComponent implements OnInit {
   }
 
   withdraw(){
+    var accno=this.withdrawForm.value.acno;
+    var pswd=this.withdrawForm.value.pswd;
+    var amount=this.depositForm.value.amount;
     if(this.withdrawForm.valid){
-      var accno=this.withdrawForm.value.acno;
-      var pswd=this.withdrawForm.value.pswd;
-      var amount=this.depositForm.value.amount;
-      const result=this.dataService.withdraw(accno,pswd,amount)
-      if(result){
-         alert("The given amount "+amount+" debited....and New balance is: "+result);
-       }
+      
+      this.dataService.withdraw(accno,pswd,amount)
+      .subscribe((result:any)=>{
+        if(result){
+          alert(result.message)
+        }
+       
+      },
+      (result:any)=>{
+        alert(result.error.message)
+      })
     }
+      
     else{
       alert("Invalid Form")
     }
    
+  }
+  deleteAcc(){
+    this.acno=localStorage.getItem("acno")
   }
 
 }

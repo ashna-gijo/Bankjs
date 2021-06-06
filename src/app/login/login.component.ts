@@ -39,12 +39,21 @@ login(){
     var acno=this.loginForm.value.acno;
     var pswd=this.loginForm.value.pswd;
   
-    const result=this.dataservices.login(acno,pswd)
-    if(result){
-      alert("Login Successful");
-              this.router.navigateByUrl('dashboard');
-    }
-  }
+    this.dataservices.login(acno,pswd)
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message);
+        localStorage.setItem("name",result.name);
+        localStorage.setItem("acno",result.acno);
+      this.router.navigateByUrl("dashboard");
+      }
+     
+    },
+    (result)=>{
+      alert(result.error.message)
+    })
+   
+      }
   
     else{
       alert("Invalid Form")
