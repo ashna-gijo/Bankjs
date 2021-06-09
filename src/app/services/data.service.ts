@@ -160,4 +160,8 @@ options={
      //   return false;
      // }
 }
+
+deleteAccDetails(acno:any){
+  return this.http.delete("http://localhost:3000/deleteAccDetails/"+acno.options)
+}
 }

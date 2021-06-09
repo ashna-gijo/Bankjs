@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -25,8 +26,9 @@ export class DashboardComponent implements OnInit {
 
   user:any;
   acno:any;
+  lDate:Date=new Date()
   
-  constructor(private dataService:DataService,private fb:FormBuilder) {
+  constructor(private dataService:DataService,private fb:FormBuilder,private router:Router) {
     this.user=localStorage.getItem("name")
    }
 
@@ -79,6 +81,23 @@ export class DashboardComponent implements OnInit {
       alert("Invalid Form")
     }
    
+  }
+
+  onDelete(event:any){
+    this.dataService.deleteAccDetails(event)
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+        this.router.navigateByUrl("")
+        
+      }
+    },
+    (result:any)=>{
+      alert(result.error.message)
+    })
+  }
+  onCancel(){
+    this.acno=""
   }
   deleteAcc(){
     this.acno=localStorage.getItem("acno")
