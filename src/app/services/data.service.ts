@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import{environment} from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
@@ -48,7 +48,7 @@ options={
       pswd
     }
 
-    return this.http.post("http://localhost:3000/register",data)
+    return this.http.post(environment.apiUrl+"/register",data)
     
     //let user=this.accountDetails;
     //if(acno in user){
@@ -75,7 +75,7 @@ options={
       pswd
     }
 
-    return this.http.post("http://localhost:3000/login",data,this.options)
+    return this.http.post(environment.apiUrl+"/login",data,this.options)
     
     //let user=this.accountDetails;
     
@@ -104,7 +104,7 @@ options={
       amount
     }
 
-    return this.http.post("http://localhost:3000/deposit",data,this.options)
+    return this.http.post(environment.apiUrl+"/deposit",data,this.options)
     
     // var amount=parseInt(amt);
     //let user=this.accountDetails;
@@ -133,7 +133,7 @@ options={
       amount
     }
 
-    return this.http.post("http://localhost:3000/withdraw",data,this.options)
+    return this.http.post(environment.apiUrl+"/withdraw",data,this.options)
     
    // var amount=parseInt(amt);
    // let user=this.accountDetails;
@@ -162,6 +162,6 @@ options={
 }
 
 deleteAccDetails(acno:any){
-  return this.http.delete("http://localhost:3000/deleteAccDetails/"+acno.options)
+  return this.http.delete(environment.apiUrl+"/deleteAccDetails/"+acno.options)
 }
 }
